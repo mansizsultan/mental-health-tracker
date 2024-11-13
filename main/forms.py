@@ -15,13 +15,3 @@ class MoodEntryForm(ModelForm):
         feelings = self.cleaned_data["feelings"]
         return strip_tags(feelings)
     
-
-def create_mood_entry(request):
-    form = MoodEntryForm(request.POST or None)
-
-    if form.is_valid() and request.method == "POST":
-        form.save()
-        return redirect('main:show_main')
-
-    context = {'form': form}
-    return render(request, "create_mood_entry.html", context)
